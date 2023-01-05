@@ -28,6 +28,7 @@ public class RotateToMouse : MonoBehaviour
             rayMouse = cam.ScreenPointToRay(mousePos);
             if(Physics.Raycast(rayMouse.origin, rayMouse.direction, out hit))
             {
+                Debug.Log(hit);
                 RotateToMouseDirection(gameObject, hit.point);
             }
         }

@@ -9,24 +9,29 @@ public class ProjectileMove : MonoBehaviour
     public float fireRate = 0f;
     public float range = 10;
     // Start is called before the first frame update
+
+    private Vector3 currentPosition;
     void Start()
     {
-        
+        currentPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 currentPosition = transform.position;
+        
         if(speed != 0)
         {
             transform.position += transform.forward * (speed * Time.deltaTime);
-            
+            if (Vector3.Distance(currentPosition, transform.position) > range)
+            {
+                Destroy(this.gameObject);
+            }
         }
         else
         {
             Debug.Log("No Speed");
         }
-
+        
     }
 }
