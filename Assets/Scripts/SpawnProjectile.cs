@@ -6,42 +6,83 @@ public class SpawnProjectile : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject FirePoint;
-    public List<GameObject> vfx = new List<GameObject>();
-    public RotateToMouse rotateToMouse;
+    public GameObject Player;
+    public List<GameObject> Projectiles = new List<GameObject>();
+    public List<GameObject> MuzzleFlashes = new List<GameObject>();
+    public List<GameObject> Weapons = new List<GameObject>();
 
-    private GameObject effectToSpawn;
 
-    
+    public int useProjectile = 0;
+    public int useMuzzleFlash = 0;
+    public int useWeapon = 0;
+
+
+    private GameObject projectile;
+    private GameObject muzzleflash;
+    private Weapon weapon;
+
+    public Camera fpsCam;
+    GameObject muzzle;
+    private bool canFire = true;
     void Start()
     {
-        effectToSpawn = vfx[0];
+        projectile = Projectiles[useProjectile];
+        muzzleflash = MuzzleFlashes[useMuzzleFlash];
+        weapon = Weapons[useWeapon].GetComponent<Weapon>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetButton("Fire1"))
         {
-            SpawnVFX();
+            if (canFire)
+            {
+                StartCoroutine(Fire());
+            }
+            
         }
     }
 
+
+    IEnumerator Fire()
+    {
+        canFire = false;
+        muzzle = Instantiate(muzzleflash, FirePoint.transform.position, Quaternion.identity);
+        muzzle.transform.localRotation = Quaternion.Euler(fpsCam.transform.localRotation.eulerAngles.x, Player.transform.localRotation.eulerAngles.y, 0);
+        ParticleSystem PSMuzzle = muzzle.GetComponentInChildren<ParticleSystem>();
+        SpawnVFX();
+        Destroy(muzzle, PSMuzzle.main.duration);
+        StartCoroutine(FireRateHandler());
+        yield return null;
+    }
+
+    IEnumerator FireRateHandler()
+    {
+        float timeToNextFire = 1f / weapon.fireRate;
+        yield return new WaitForSeconds(timeToNextFire);
+        canFire = true;
+    }
     void SpawnVFX()
     {
         GameObject vfx;
+        Vector3 InitialPosition;
+        
 
-        if (FirePoint!=null)
+        if (FirePoint != null)
         {
-            vfx = Instantiate(effectToSpawn, FirePoint.transform.position, Quaternion.identity);
-            if(rotateToMouse != null)
+
+            vfx = Instantiate(projectile, FirePoint.transform.position, Quaternion.identity);
+            InitialPosition = vfx.transform.position;
+            if (fpsCam != null)
             {
-                vfx.transform.localRotation = rotateToMouse.GetRotation();
+                vfx.transform.localRotation = Quaternion.Euler(fpsCam.transform.localRotation.eulerAngles.x, Player.transform.localRotation.eulerAngles.y, 0);
+                
             }
+
         }
-        else
-        {
-            Debug.Log("No Fire vfx");
-        }
+        
     }
 }
 
