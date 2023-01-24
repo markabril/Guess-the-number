@@ -29,7 +29,7 @@ public class RotateToMouse : MonoBehaviour
             if(Physics.Raycast(rayMouse.origin, rayMouse.direction, out hit))
             {
                 Debug.Log(hit);
-                RotateToMouseDirection(gameObject, hit.point);
+                RotateToMouseDirection(hit.point);
             }
         }
         else
@@ -38,11 +38,9 @@ public class RotateToMouse : MonoBehaviour
         }
     }
 
-    void RotateToMouseDirection(GameObject obj, Vector3 destination)
+    void RotateToMouseDirection(Vector3 destination )
     {
-        direction = destination - obj.transform.position;
-        rotation = Quaternion.LookRotation(direction);
-        obj.transform.localRotation = Quaternion.Lerp(obj.transform.rotation, rotation, 1);
+        transform.position = destination;
     }
 
     public Quaternion GetRotation()

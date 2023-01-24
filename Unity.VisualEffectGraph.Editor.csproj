@@ -138,9 +138,9 @@
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\Models\Operators\Implementations\SphericalToRectangular.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\Models\Operators\Implementations\RectangularToPolar.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\ShaderGraph\VFXShaderGraphParticleOutput.cs" />
-    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\Models\Operators\Implementations\SquaredDistance.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\Models\Operators\Implementations\TransformMatrix.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\GraphView\Elements\Controllers\VFXParameterNodeController.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\Models\Operators\Implementations\SquaredDistance.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\Models\Blocks\Implementations\Update\BackupOldPosition.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\GraphView\Views\Properties\Vector2PropertyRM.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.7\Editor\ShaderGraph\VFXShaderGraphPostProcessor.cs" />
